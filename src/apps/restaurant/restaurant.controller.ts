@@ -6,17 +6,20 @@ import {
   restaurantServiceDelete,
   restaurantServiceGetAll,
   restaurantServiceGetOne,
-  restaurantServiceeUpdate,
+  restaurantServiceUpdate,
 } from "./restaurant.service";
 
+/* aqui vai todos os controlllers, dessa forma organizado fica mais facil a inclsusão
+de middlewares ou decoradores */
 const restaurantController = Router();
+
 restaurantController.get("/", restaurantServiceGetAll);
 
 restaurantController.get("/:id", restaurantServiceGetOne);
 
 restaurantController.post("/", restaurantServiceCreate);
 
-restaurantController.put("/:id", restaurantServiceeUpdate);
+restaurantController.put("/:id", restaurantServiceUpdate);
 
 restaurantController.delete("/:id", restaurantServiceDelete);
 

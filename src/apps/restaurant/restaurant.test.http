@@ -1,0 +1,29 @@
+#criar um novo restaurante
+POST http://localhost:3000/restaurants HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "abcd",
+    "address": "Local 123"
+}
+
+###
+
+#pegar um restaurante especifico pelo seu id
+GET http://localhost:3000/restaurants/1 HTTP/1.1
+
+##pegar todos os restaurantes seus produtos e categorias
+GET http://localhost:3000/restaurants/ HTTP/1.1
+###
+
+###
+PUT http://localhost:3000/restaurants/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "nome mudado"
+}
+
+###d
+#deleta um restaurante especifico
+DELETE http://localhost:3000/restaurants/1 HTTP/1.1
