@@ -14,19 +14,31 @@ datasource db {
 }
 
 model Restaurant {
-  id           Int       @id @default(autoincrement())
-  photo        String    @db.Text
-  name         String    @db.VarChar(128)
-  address      String    @db.VarChar(128)
-  openingHours String    @db.VarChar(255)
+  id           Int           @id @default(autoincrement())
+  photo        String?       @db.Text
+  name         String        @unique @db.VarChar(128)
+  address      String        @db.VarChar(128)
   products     Product[]
+  openingHours OpeningHour[]
 
   @@map("restaurants")
 }
 
+model OpeningHour {
+  id Int @id @default(autoincrement())
+
+  day_of_week  String     @unique
+  hour_open    String
+  hour_closed  String
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+
+  @@map("opening_hours")
+}
+
 model Product {
   id               Int        @id @default(autoincrement())
-  photo            String
+  photo            String?
   name             String     @db.Text
   price            Float
   promoDescription String?
@@ -34,7 +46,7 @@ model Product {
   promoDays        String?
   restaurant       Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId     Int
-  Category         Category?  @relation(fields: [categoryId], references: [id])
+  category         Category?  @relation(fields: [categoryId], references: [id])
   categoryId       Int?
 
   @@map("products")
@@ -42,5 +54,8 @@ model Product {
 
 model Category {
   id       Int       @id @default(autoincrement())
+  name     String    @unique @db.VarChar(64)
   products Product[]
+
+  @@map("categories")
 }
